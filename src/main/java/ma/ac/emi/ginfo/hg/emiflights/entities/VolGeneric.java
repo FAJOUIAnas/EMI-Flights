@@ -11,6 +11,7 @@ import java.time.LocalTime;
 
 @Entity
 @NoArgsConstructor
+//anas
 public class VolGeneric implements Serializable {
     @EmbeddedId
     private VolGenericPKid idVol;

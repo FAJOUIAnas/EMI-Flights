@@ -16,10 +16,8 @@ public class Plane implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPlane;
-
     @Nonnull
     private String model;
-
     @Nonnull
     private int nbSeats;
 }

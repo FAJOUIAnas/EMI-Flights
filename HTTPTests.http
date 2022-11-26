@@ -1,0 +1,33 @@
+GET http://localhost:8080/plane/all
+
+###
+
+POST http://localhost:8080/plane/add
+Content-Type: application/json
+
+{
+  "model" : "Fajoui",
+  "nbSeats" : "60"
+}
+
+###
+
+PUT http://localhost:9999/employee/update
+Content-Type: application/json
+
+{
+  "id" : 1,
+  "name" : "Souhail",
+  "email" : "ss@gmail.com",
+  "jobTitle" : "student",
+  "phone" : "6969",
+  "imageUrl" : "hoho"
+}
+
+###
+
+GET http://localhost:9999/employee/find/1
+
+###
+
+DELETE http://localhost:9999/employee/delete/2

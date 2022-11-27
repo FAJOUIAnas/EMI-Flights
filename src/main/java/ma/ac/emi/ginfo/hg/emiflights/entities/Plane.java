@@ -12,6 +12,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
+//test
 public class Plane implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

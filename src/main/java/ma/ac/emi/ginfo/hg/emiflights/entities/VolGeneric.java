@@ -14,12 +14,12 @@ import java.util.List;
 @IdClass(VolGenericPK.class)
 public class VolGeneric implements Serializable {
     @Id
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "idPlane", nullable = false)
+    @ManyToOne
     private Plane plane;
     @Id
     @Column(length = 100)
     private String day;
+
     @Nonnull
     private LocalTime departureHour;
     @Nonnull
@@ -27,6 +27,6 @@ public class VolGeneric implements Serializable {
     @Nonnull
     private LocalTime duration;
 
-    @OneToMany(mappedBy = "volGeneric")
+    @OneToMany(mappedBy = "volGeneric", cascade = CascadeType.ALL)
     private List<Vol> vols;
 }

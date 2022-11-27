@@ -16,15 +16,15 @@ import java.util.List;
 public class Plane implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idPlane;
+    private long id;
     @Nonnull
     private String model;
     @Nonnull
     private int nbSeats;
 
-    @OneToMany
+    @OneToMany(mappedBy = "plane")
     private List<Place> places;
 
-    @OneToMany(mappedBy = "plane")
+    @OneToMany(mappedBy = "plane", cascade = CascadeType.ALL)
     private List<VolGeneric> volsGeneric;
 }

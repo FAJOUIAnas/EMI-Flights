@@ -1,9 +1,6 @@
 package ma.ac.emi.ginfo.hg.emiflights.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import ma.ac.emi.ginfo.hg.emiflights.entities.embeddedIds.VolPk;
 
@@ -18,7 +15,7 @@ import java.util.Optional;
 @IdClass(VolPk.class)
 public class Vol implements Serializable {
     @Id
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private VolGeneric volGeneric;
     @Id
     private LocalDate departureDate;

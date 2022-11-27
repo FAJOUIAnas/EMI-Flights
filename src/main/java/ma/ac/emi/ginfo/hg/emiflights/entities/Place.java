@@ -13,8 +13,7 @@ public class Place implements Serializable {
     private int numero;
 
     @Id
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "idPlane", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Plane plane;
 
     @OneToOne(mappedBy = "place")

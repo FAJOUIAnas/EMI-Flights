@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
@@ -20,4 +21,10 @@ public class Plane implements Serializable {
     private String model;
     @Nonnull
     private int nbSeats;
+
+    @OneToMany
+    private List<Place> places;
+
+    @OneToMany(mappedBy = "plane")
+    private List<VolGeneric> volsGeneric;
 }

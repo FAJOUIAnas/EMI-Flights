@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
@@ -15,9 +16,15 @@ import java.io.Serializable;
 public class Plane implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idPlane;
+    private long id;
     @Nonnull
     private String model;
     @Nonnull
     private int nbSeats;
+
+    @OneToMany(mappedBy = "plane")
+    private List<Place> places;
+
+    @OneToMany(mappedBy = "plane", cascade = CascadeType.ALL)
+    private List<VolGeneric> volsGeneric;
 }

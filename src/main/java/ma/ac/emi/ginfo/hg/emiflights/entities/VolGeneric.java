@@ -2,18 +2,24 @@ package ma.ac.emi.ginfo.hg.emiflights.entities;
 
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
+import ma.ac.emi.ginfo.hg.emiflights.entities.embeddedIds.VolGenericPK;
 
 import java.io.Serializable;
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
+@IdClass(VolGenericPK.class)
 public class VolGeneric implements Serializable {
-    @EmbeddedId
-    private VolGenericPKid idVol;
+    @Id
+    @ManyToOne
+    private Plane plane;
+    @Id
+    @Column(length = 100)
+    private String day;
+
     @Nonnull
     private LocalTime departureHour;
     @Nonnull
@@ -21,5 +27,6 @@ public class VolGeneric implements Serializable {
     @Nonnull
     private LocalTime duration;
 
-
+    @OneToMany(mappedBy = "volGeneric", cascade = CascadeType.ALL)
+    private List<Vol> vols;
 }

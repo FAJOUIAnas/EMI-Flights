@@ -16,5 +16,5 @@ public class Reservation implements Serializable {
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Place place;
+    private Seat seat;
 }

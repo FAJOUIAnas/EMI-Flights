@@ -34,4 +34,5 @@ public class VolGeneric implements Serializable {
 
     @OneToMany(mappedBy = "volGeneric", cascade = CascadeType.ALL)
     private List<Vol> vols;
+
 }

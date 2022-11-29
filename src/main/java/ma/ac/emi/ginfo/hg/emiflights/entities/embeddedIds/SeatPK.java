@@ -4,7 +4,7 @@ import ma.ac.emi.ginfo.hg.emiflights.entities.Plane;
 
 import java.io.Serializable;
 
-public class PlacePK implements Serializable {
-    private int numero;
+public class SeatPK implements Serializable {
+    private Long id;
     private Plane plane;
 }

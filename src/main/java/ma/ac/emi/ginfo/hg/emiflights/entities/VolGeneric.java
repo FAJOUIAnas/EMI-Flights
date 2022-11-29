@@ -17,13 +17,18 @@ public class VolGeneric implements Serializable {
     @ManyToOne
     private Plane plane;
     @Id
+    @ManyToOne
+    private Airport departureAirport;
+
     @Column(length = 100)
     private String day;
-
     @Nonnull
     private LocalTime departureHour;
     @Nonnull
-    private LocalTime arrivalTime;
+    private LocalTime arrivalHour;
+    @Nonnull
+    @ManyToOne
+    private Airport arrivalAirport;
     @Nonnull
     private LocalTime duration;
 

@@ -1,14 +1,10 @@
 package ma.ac.emi.ginfo.hg.emiflights.entities;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
-
-
 import java.io.Serializable;
+
 @Entity
 @NoArgsConstructor
 public class Reservation implements Serializable {
@@ -16,5 +12,6 @@ public class Reservation implements Serializable {
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Place place;
+    @JoinColumns({ @JoinColumn(name = "seat_id"), @JoinColumn(name = "plane_id") })
+    private Seat seat;
 }

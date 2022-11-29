@@ -1,9 +1,7 @@
 package ma.ac.emi.ginfo.hg.emiflights.restcontrollers;
 
-import ma.ac.emi.ginfo.hg.emiflights.entities.Vol;
-import ma.ac.emi.ginfo.hg.emiflights.entities.VolGeneric;
+import ma.ac.emi.ginfo.hg.emiflights.entities.FlightGeneric;
 import ma.ac.emi.ginfo.hg.emiflights.services.VolGenericService;
-import ma.ac.emi.ginfo.hg.emiflights.services.VolService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,14 +19,14 @@ public class VolGenericController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<VolGeneric>> getAllVolGenerics() {
-        List<VolGeneric> volGenerics = volGenericService.findAllVolGenerics();
-        return new ResponseEntity<>(volGenerics, HttpStatus.OK);
+    public ResponseEntity<List<FlightGeneric>> getAllVolGenerics() {
+        List<FlightGeneric> flightGenerics = volGenericService.findAllVolGenerics();
+        return new ResponseEntity<>(flightGenerics, HttpStatus.OK);
     }
 
     @PostMapping("/add")
-    public ResponseEntity<VolGeneric> addVolGeneric(@RequestBody VolGeneric volGeneric) {
-        VolGeneric newVolGeneric = volGenericService.addVolGeneric(volGeneric);
-        return new ResponseEntity<>(newVolGeneric, HttpStatus.CREATED);
+    public ResponseEntity<FlightGeneric> addVolGeneric(@RequestBody FlightGeneric flightGeneric) {
+        FlightGeneric newFlightGeneric = volGenericService.addVolGeneric(flightGeneric);
+        return new ResponseEntity<>(newFlightGeneric, HttpStatus.CREATED);
     }
 }

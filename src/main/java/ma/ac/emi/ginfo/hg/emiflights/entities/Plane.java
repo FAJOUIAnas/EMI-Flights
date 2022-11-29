@@ -26,5 +26,5 @@ public class Plane implements Serializable {
     private List<Seat> seats;
 
     @OneToMany(mappedBy = "plane", cascade = CascadeType.ALL)
-    private List<VolGeneric> volsGeneric;
+    private List<FlightGeneric> volsGeneric;
 }

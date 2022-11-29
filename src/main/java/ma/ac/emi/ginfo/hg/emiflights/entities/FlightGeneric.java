@@ -3,7 +3,7 @@ package ma.ac.emi.ginfo.hg.emiflights.entities;
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
-import ma.ac.emi.ginfo.hg.emiflights.entities.embeddedIds.VolGenericPK;
+import ma.ac.emi.ginfo.hg.emiflights.entities.embeddedIds.FlightGenericPK;
 
 import java.io.Serializable;
 import java.time.LocalTime;
@@ -11,8 +11,8 @@ import java.util.List;
 
 @Entity
 @NoArgsConstructor
-@IdClass(VolGenericPK.class)
-public class VolGeneric implements Serializable {
+@IdClass(FlightGenericPK.class)
+public class FlightGeneric implements Serializable {
     @Id
     @ManyToOne
     private Plane plane;
@@ -32,6 +32,6 @@ public class VolGeneric implements Serializable {
     @Nonnull
     private LocalTime duration;
 
-    @OneToMany(mappedBy = "volGeneric", cascade = CascadeType.ALL)
-    private List<Vol> vols;
+    @OneToMany(mappedBy = "flightGeneric", cascade = CascadeType.ALL)
+    private List<Flight> flights;
 }

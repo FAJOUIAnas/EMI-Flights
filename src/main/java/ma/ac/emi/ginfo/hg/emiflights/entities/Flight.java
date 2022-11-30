@@ -13,6 +13,8 @@ import java.time.LocalDate;
 public class Flight implements Serializable {
     @Id
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumns({ @JoinColumn(name = "plane_id"),
+                    @JoinColumn(name = "departureAirport_code") })
     private FlightGeneric flightGeneric;
     @Id
     private LocalDate departureDate;

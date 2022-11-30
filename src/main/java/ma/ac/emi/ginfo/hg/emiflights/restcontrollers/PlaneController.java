@@ -30,4 +30,22 @@ public class PlaneController {
         Plane newPlane = planeService.addPlane(plane);
         return new ResponseEntity<>(newPlane, HttpStatus.CREATED);
     }
+
+    @GetMapping("/find/{id}")
+    public ResponseEntity<Plane> getPlaneById(@PathVariable("id") Long id) {
+        Plane plane = planeService.findPlaneById(id);
+        return new ResponseEntity<>(plane, HttpStatus.OK);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<Plane> updatePlane(@RequestBody Plane plane) {
+        Plane updatePlane = planeService.updatePlane(plane);
+        return new ResponseEntity<>(updatePlane, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deletePlane(@PathVariable("id") Long id) {
+        planeService.deletePlane(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

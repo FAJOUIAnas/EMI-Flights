@@ -6,7 +6,7 @@ import ma.ac.emi.ginfo.hg.emiflights.entities.Plane;
 
 import java.io.Serializable;
 
-public class VolGenericPK implements Serializable {
+public class FlightGenericPK implements Serializable {
 
     @ManyToOne
     @MapsId

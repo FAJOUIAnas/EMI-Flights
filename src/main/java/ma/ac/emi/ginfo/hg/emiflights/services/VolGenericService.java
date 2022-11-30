@@ -1,8 +1,6 @@
 package ma.ac.emi.ginfo.hg.emiflights.services;
 
-import ma.ac.emi.ginfo.hg.emiflights.entities.Plane;
-import ma.ac.emi.ginfo.hg.emiflights.entities.VolGeneric;
-import ma.ac.emi.ginfo.hg.emiflights.repositories.PlaneRepository;
+import ma.ac.emi.ginfo.hg.emiflights.entities.FlightGeneric;
 import ma.ac.emi.ginfo.hg.emiflights.repositories.VolGenericRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,11 +16,11 @@ public class VolGenericService {
         this.volGenericRepository = volGenericRepository;
     }
 
-    public VolGeneric addVolGeneric(VolGeneric volGeneric) {
-        return volGenericRepository.save(volGeneric);
+    public FlightGeneric addVolGeneric(FlightGeneric flightGeneric) {
+        return volGenericRepository.save(flightGeneric);
     }
 
-    public List<VolGeneric> findAllVolGenerics() {
+    public List<FlightGeneric> findAllVolGenerics() {
         return volGenericRepository.findAll();
     }
 }

@@ -4,6 +4,7 @@ import ma.ac.emi.ginfo.hg.emiflights.entities.Plane;
 import ma.ac.emi.ginfo.hg.emiflights.entities.Reservation;
 import ma.ac.emi.ginfo.hg.emiflights.services.PlaneService;
 import ma.ac.emi.ginfo.hg.emiflights.services.ReservationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -2,6 +2,7 @@ package ma.ac.emi.ginfo.hg.emiflights.restcontrollers;
 
 import ma.ac.emi.ginfo.hg.emiflights.entities.Flight;
 import ma.ac.emi.ginfo.hg.emiflights.services.VolService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

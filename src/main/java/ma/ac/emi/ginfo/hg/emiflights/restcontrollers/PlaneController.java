@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @CrossOrigin
 @RestController
@@ -25,14 +26,22 @@ public class PlaneController {
         return new ResponseEntity<>(planes, HttpStatus.OK);
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<Plane> addPlane(@RequestBody Plane plane) {
-        Plane newPlane = planeService.addPlane(plane);
+    @PostMapping("/add/{nbSeatsFirstClass}/{nbSeatsBusiness}/{nbSeatsPremium}/{nbSeatsEconomy}")
+    public ResponseEntity<Plane> addPlane(@RequestBody Plane plane,
+                                          @PathVariable("nbSeatsFirstClass") int nbSeatsFirstClass,
+                                          @PathVariable("nbSeatsBusiness") int nbSeatsBusiness,
+                                          @PathVariable("nbSeatsPremium") int nbSeatsPremium,
+                                          @PathVariable("nbSeatsEconomy") int nbSeatsEconomy) {
+        Plane newPlane = planeService.addPlane(plane,
+                nbSeatsFirstClass,
+                nbSeatsBusiness,
+                nbSeatsPremium,
+                nbSeatsEconomy);
         return new ResponseEntity<>(newPlane, HttpStatus.CREATED);
     }
 
     @GetMapping("/find/{id}")
-    public ResponseEntity<Plane> getPlaneById(@PathVariable("id") Long id) {
+    public ResponseEntity<Plane> getPlaneById(@PathVariable("id") UUID id) {
         Plane plane = planeService.findPlaneById(id);
         return new ResponseEntity<>(plane, HttpStatus.OK);
     }
@@ -44,7 +53,7 @@ public class PlaneController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deletePlane(@PathVariable("id") Long id) {
+    public ResponseEntity<?> deletePlane(@PathVariable("id") UUID id) {
         planeService.deletePlane(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

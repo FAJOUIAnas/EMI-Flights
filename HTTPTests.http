@@ -2,32 +2,43 @@ GET http://localhost:8080/plane/all
 
 ###
 
-POST http://localhost:8080/plane/add
+POST http://localhost:8080/plane/add/0/0/0/2
 Content-Type: application/json
 
 {
-  "model" : "Fajoui",
-  "nbSeats" : "60"
+  "model" : "xdd"
 }
 
 ###
 
-PUT http://localhost:9999/employee/update
+GET http://localhost:8080/seat/all
+
+###
+
+POST http://localhost:8080/seat/add
 Content-Type: application/json
 
 {
-  "id" : 1,
-  "name" : "Souhail",
-  "email" : "ss@gmail.com",
-  "jobTitle" : "student",
-  "phone" : "6969",
-  "imageUrl" : "hoho"
+  "id" : 8,
+  "plane" : {
+    "model" : "xd",
+    "seats" : []
+  }
 }
 
 ###
 
-GET http://localhost:9999/employee/find/1
+PUT http://localhost:8080/plane/update
+Content-Type: application/json
+
+{
+  "model" : "fjwi"
+}
 
 ###
 
-DELETE http://localhost:9999/employee/delete/2
+GET http://localhost:8080/plane/find/1
+
+###
+
+DELETE http://localhost:8080/plane/delete/88535b64-6920-46c4-9370-cae73ceb5d09

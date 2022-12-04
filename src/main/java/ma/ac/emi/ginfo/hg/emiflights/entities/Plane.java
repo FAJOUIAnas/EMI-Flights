@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,15 +17,17 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Plane implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
     @Nonnull
     private String model;
 
-    @OneToMany(mappedBy = "plane")
+    @OneToMany(targetEntity = Seat.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(referencedColumnName = "id", name = "plane")
+    @Nonnull
     private List<Seat> seats;
 
     @OneToMany(mappedBy = "plane", cascade = CascadeType.ALL)
-    private List<FlightGeneric> volsGeneric;
-
+    private List<FlightGeneric> flightsGeneric;
 }

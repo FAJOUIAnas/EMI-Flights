@@ -3,6 +3,7 @@ package ma.ac.emi.ginfo.hg.emiflights.entities;
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
+import ma.ac.emi.ginfo.hg.emiflights.entities.embeddedIds.SeatPK;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -12,8 +13,8 @@ import java.time.LocalDate;
 public class Reservation implements Serializable {
     @Id
     private Long id;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumns({ @JoinColumn(name = "seat_id"), @JoinColumn(name = "plane_id") })
+    /*@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumns({ @JoinColumn(name = "seat_id")*//*, @JoinColumn(name = "plane_id") *//*})
     private Seat seat;
 
     @Nonnull
@@ -21,7 +22,7 @@ public class Reservation implements Serializable {
 
     @Nonnull
     @ManyToOne
-    private Flight flight;
+    private Flight flight;*/
 
 
 }

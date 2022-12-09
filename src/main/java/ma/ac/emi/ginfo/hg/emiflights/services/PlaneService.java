@@ -1,11 +1,13 @@
 package ma.ac.emi.ginfo.hg.emiflights.services;
 
 import ma.ac.emi.ginfo.hg.emiflights.entities.Plane;
-import ma.ac.emi.ginfo.hg.emiflights.entities.Seat;
-import ma.ac.emi.ginfo.hg.emiflights.entities.enumerations.SeatClass;
+import ma.ac.emi.ginfo.hg.emiflights.entities.ref.Class;
+import ma.ac.emi.ginfo.hg.emiflights.entities.ref.ClassSeat;
+import ma.ac.emi.ginfo.hg.emiflights.exception.ClassNotFoundException;
 import ma.ac.emi.ginfo.hg.emiflights.exception.PlaneNotFoundException;
+import ma.ac.emi.ginfo.hg.emiflights.repositories.ClassRepository;
+import ma.ac.emi.ginfo.hg.emiflights.repositories.ClassSeatRepository;
 import ma.ac.emi.ginfo.hg.emiflights.repositories.PlaneRepository;
-import ma.ac.emi.ginfo.hg.emiflights.repositories.SeatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,39 +18,28 @@ import java.util.UUID;
 @Service
 public class PlaneService {
     private final PlaneRepository planeRepository;
-    private final SeatRepository seatRepository;
+    private final ClassSeatRepository classSeatRepository;
+
+    private final ClassRepository classRepository;
 
     @Autowired
-    public PlaneService(PlaneRepository planeRepository, SeatRepository seatRepository) {
+    public PlaneService(PlaneRepository planeRepository, ClassSeatRepository classSeatRepository, ClassRepository classRepository) {
         this.planeRepository = planeRepository;
-        this.seatRepository = seatRepository;
+        this.classSeatRepository = classSeatRepository;
+        this.classRepository = classRepository;
     }
 
     public Plane addPlane(Plane plane,
-                          int nbSeatsFirstClass,
-                          int nbSeatsBusiness,
-                          int nbSeatsPremium,
-                          int nbSeatsEconomy) {
-        List<Seat> seats = new ArrayList<>();
-        for(int i = 1; i <= nbSeatsFirstClass; i++) {
-            Seat seat = new Seat(SeatClass.FIRSTCLASS);
-            seats.add(seat);
-        }
-        for(int i = nbSeatsFirstClass + 1; i <= nbSeatsFirstClass + nbSeatsBusiness; i++) {
-            Seat seat = new Seat(SeatClass.BUSINESS);
-            seats.add(seat);
-        }
-        for(int i = nbSeatsFirstClass + nbSeatsBusiness + 1; i <= nbSeatsFirstClass + nbSeatsBusiness + nbSeatsPremium; i++) {
-            Seat seat = new Seat(SeatClass.PREMUIM);
-            seats.add(seat);
-        }
-        for(int i = nbSeatsFirstClass + nbSeatsBusiness + nbSeatsPremium + 1; i <= nbSeatsFirstClass + nbSeatsBusiness + nbSeatsPremium + nbSeatsEconomy; i++) {
-            Seat seat = new Seat(SeatClass.ECONOMY);
-            seats.add(seat);
-        }
-        plane.setSeats(seats);
-        Plane newPlane = planeRepository.save(plane);
-        return newPlane;
+                          int firstClassSeats,
+                          int businessClassSeats,
+                          int economyClassSeats) {
+        Class Fclass = classRepository.findClassByCode("FST")
+                .orElseThrow(() -> new ClassNotFoundException("Class by code " + "FST" + "was not found"));
+
+        ClassSeat firstClassNb = new ClassSeat(Fclass, firstClassSeats, plane);
+        classSeatRepository.save(firstClassNb);
+
+        return planeRepository.save(plane);
     }
 
     public List<Plane> findAllPlanes() {
@@ -69,9 +60,6 @@ public class PlaneService {
     }
 
     public void deletePlane(UUID id) {
-        /*for(Seat seat : planeRepository.findPlaneById(id).get().getSeats()) {
-            seatService.delete(seat);
-        }*/
         planeRepository.deletePlaneById(id);
     }
 }

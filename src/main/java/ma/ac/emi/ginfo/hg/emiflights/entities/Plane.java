@@ -2,6 +2,7 @@ package ma.ac.emi.ginfo.hg.emiflights.entities;
 
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,9 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 public class Plane implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -23,11 +22,6 @@ public class Plane implements Serializable {
     @Nonnull
     private String model;
 
-    @OneToMany(targetEntity = Seat.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(referencedColumnName = "id", name = "plane")
     @Nonnull
-    private List<Seat> seats;
-
-    @OneToMany(mappedBy = "plane", cascade = CascadeType.ALL)
-    private List<FlightGeneric> flightsGeneric;
+    private String companyName;
 }

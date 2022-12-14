@@ -2,7 +2,6 @@ package ma.ac.emi.ginfo.hg.emiflights.restcontrollers;
 
 import ma.ac.emi.ginfo.hg.emiflights.entities.Plane;
 import ma.ac.emi.ginfo.hg.emiflights.services.PlaneService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,22 +25,14 @@ public class PlaneController {
         return new ResponseEntity<>(planes, HttpStatus.OK);
     }
 
-    @PostMapping("/add/{nbSeatsFirstClass}/{nbSeatsBusiness}/{nbSeatsPremium}/{nbSeatsEconomy}")
-    public ResponseEntity<Plane> addPlane(@RequestBody Plane plane,
-                                          @PathVariable("nbSeatsFirstClass") int nbSeatsFirstClass,
-                                          @PathVariable("nbSeatsBusiness") int nbSeatsBusiness,
-                                          @PathVariable("nbSeatsPremium") int nbSeatsPremium,
-                                          @PathVariable("nbSeatsEconomy") int nbSeatsEconomy) {
-        Plane newPlane = planeService.addPlane(plane,
-                nbSeatsFirstClass,
-                nbSeatsBusiness,
-                nbSeatsPremium,
-                nbSeatsEconomy);
+    @PostMapping("/add")
+    public ResponseEntity<Plane> addPlane(@RequestBody Plane plane) {
+        Plane newPlane = planeService.addPlane(plane);
         return new ResponseEntity<>(newPlane, HttpStatus.CREATED);
     }
 
     @GetMapping("/find/{id}")
-    public ResponseEntity<Plane> getPlaneById(@PathVariable("id") UUID id) {
+    public ResponseEntity<Plane> getPlaneById(@PathVariable UUID id) {
         Plane plane = planeService.findPlaneById(id);
         return new ResponseEntity<>(plane, HttpStatus.OK);
     }

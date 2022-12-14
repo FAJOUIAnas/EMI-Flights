@@ -1,9 +1,9 @@
 package ma.ac.emi.ginfo.hg.emiflights.entities;
 
-import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ma.ac.emi.ginfo.hg.emiflights.entities.ref.Class;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -11,14 +11,18 @@ import java.util.UUID;
 @Entity
 @Data
 @NoArgsConstructor
-public class Plane implements Serializable {
+public class Seats implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Nonnull
-    private String model;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Plane plane;
 
-    @Nonnull
-    private String companyName;
+    @ManyToOne
+    private Class _class;
+
+    private int numberOfSeats;
+
 }

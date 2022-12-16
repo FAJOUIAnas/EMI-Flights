@@ -1,9 +1,12 @@
 package ma.ac.emi.ginfo.hg.emiflights.entities;
 
+import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ma.ac.emi.ginfo.hg.emiflights.entities.ref.Class;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -17,10 +20,12 @@ public class Seats implements Serializable {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Plane plane;
 
     @ManyToOne
+    @Nonnull
     private Class _class;
 
     private int numberOfSeats;

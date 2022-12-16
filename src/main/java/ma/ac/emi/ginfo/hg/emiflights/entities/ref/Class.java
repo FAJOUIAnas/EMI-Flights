@@ -1,5 +1,6 @@
 package ma.ac.emi.ginfo.hg.emiflights.entities.ref;
 
+import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ public class Class implements Serializable {
     @Column(length = 20)
     private String code;
 
+    @Nonnull
     private String label;
 
 }

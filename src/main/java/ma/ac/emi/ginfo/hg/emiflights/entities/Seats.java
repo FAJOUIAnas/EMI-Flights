@@ -3,7 +3,9 @@ package ma.ac.emi.ginfo.hg.emiflights.entities;
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import ma.ac.emi.ginfo.hg.emiflights.entities.ref.Class;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -12,7 +14,8 @@ import java.io.Serializable;
 import java.util.UUID;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class Seats implements Serializable {
 

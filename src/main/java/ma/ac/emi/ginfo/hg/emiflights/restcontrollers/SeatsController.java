@@ -20,7 +20,7 @@ public class SeatsController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Seats>> getAllSeatss() {
+    public ResponseEntity<List<Seats>> getAllSeats() {
         List<Seats> seats = seatsService.findAllSeats();
         return new ResponseEntity<>(seats, HttpStatus.OK);
     }
@@ -39,8 +39,8 @@ public class SeatsController {
 
     @PutMapping("/update")
     public ResponseEntity<Seats> updateSeats(@RequestBody Seats seats) {
-        Seats updateSeats = seatsService.updateSeats(seats);
-        return new ResponseEntity<>(updateSeats, HttpStatus.OK);
+        Seats updatedSeats = seatsService.updateSeats(seats);
+        return new ResponseEntity<>(updatedSeats, HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")

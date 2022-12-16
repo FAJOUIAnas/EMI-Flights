@@ -34,7 +34,7 @@ public class ClassService {
 
     public Class findClassByCode(String code) {
         return classRepository.findClassByCode(code)
-                .orElseThrow(() -> new ClassNotFoundException("Class by code " + code + "was not found"));
+                .orElseThrow(() -> new ClassNotFoundException("Class by code " + code + " was not found"));
     }
 
     public void deleteClassByCode(String code) {

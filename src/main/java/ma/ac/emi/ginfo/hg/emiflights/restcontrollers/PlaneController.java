@@ -39,8 +39,8 @@ public class PlaneController {
 
     @PutMapping("/update")
     public ResponseEntity<Plane> updatePlane(@RequestBody Plane plane) {
-        Plane updatePlane = planeService.updatePlane(plane);
-        return new ResponseEntity<>(updatePlane, HttpStatus.OK);
+        Plane updatedPlane = planeService.updatePlane(plane);
+        return new ResponseEntity<>(updatedPlane, HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")

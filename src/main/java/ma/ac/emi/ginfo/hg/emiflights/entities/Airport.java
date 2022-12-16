@@ -8,20 +8,22 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class Plane implements Serializable {
+public class Airport implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @Column(length = 20)
+    private String code;
 
     @Nonnull
-    private String model;
+    private String label;
 
     @Nonnull
-    private String companyName;
+    private String city;
+
+    @Nonnull
+    private String country;
 }

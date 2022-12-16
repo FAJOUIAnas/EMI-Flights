@@ -1,7 +1,9 @@
 package ma.ac.emi.ginfo.hg.emiflights.entities.ref;
 
 import jakarta.annotation.Nonnull;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,9 +15,9 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Class implements Serializable {
+public class Day implements Serializable {
     @Id
-    @Column(length = 20)
+    @Column(length = 5)
     private String code;
 
     @Nonnull

@@ -1,14 +1,19 @@
 package ma.ac.emi.ginfo.hg.emiflights.entities.ref;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import ma.ac.emi.ginfo.hg.emiflights.entities.Plane;
+import org.hibernate.Hibernate;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 public class ClassSeat implements Serializable {
 
     @Id
@@ -27,5 +32,18 @@ public class ClassSeat implements Serializable {
         this._class = _class;
         this.numberOfSeats = numberOfSeats;
         this.plane = plane;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        ClassSeat classSeat = (ClassSeat) o;
+        return id != null && Objects.equals(id, classSeat.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

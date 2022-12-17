@@ -1,0 +1,21 @@
+GET http://localhost:8080/reservation/all
+
+###
+
+POST http://localhost:8080/reservation/add
+Content-Type: application/json
+
+{
+  "code" : "code 2"
+}
+
+###
+
+POST http://localhost:8080/reservation/modify?seat_number=11
+Content-Type: application/json
+
+{
+  "id" : "2c2c1bee-8425-49b7-8206-980e02a22df2",
+  "code" : "rda"
+}
+

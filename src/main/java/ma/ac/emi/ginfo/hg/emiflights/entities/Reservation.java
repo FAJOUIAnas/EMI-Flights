@@ -2,18 +2,23 @@ package ma.ac.emi.ginfo.hg.emiflights.entities;
 
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import ma.ac.emi.ginfo.hg.emiflights.entities.ref.AgeGroup;
 import ma.ac.emi.ginfo.hg.emiflights.entities.ref.Civility;
 import ma.ac.emi.ginfo.hg.emiflights.entities.ref.Class;
 import ma.ac.emi.ginfo.hg.emiflights.entities.ref.ReservationStatus;
+import org.hibernate.Hibernate;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 public class Reservation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -59,4 +64,16 @@ public class Reservation implements Serializable {
     @ManyToOne
     private Flight flight;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Reservation that = (Reservation) o;
+        return id != null && Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

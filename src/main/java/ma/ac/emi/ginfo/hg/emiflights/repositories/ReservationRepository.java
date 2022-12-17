@@ -18,17 +18,17 @@ public interface ReservationRepository extends JpaRepository<Reservation, UUID> 
     @Transactional
     void deleteReservationById(UUID id);
 
-    Reservation findReservationByCode(String code);
+    Optional<Reservation> findReservationByCode(String code);
 
-    Reservation findReservationByCreationDate(LocalDate creationDate);
+    Optional<Reservation> findReservationByCreationDate(LocalDate creationDate);
 
-    Reservation findReservationByModificationDate(LocalDate modificationDate);
+    Optional<Reservation> findReservationByModificationDate(LocalDate modificationDate);
 
-    Reservation findReservationByFlight(UUID flightId);
+    Optional<Reservation> findReservationByFlight(Flight flight);
 
-    Reservation findReservationByPassengerFirstName(String firstName);
+    Optional<Reservation> findReservationByPassengerFirstName(String firstName);
 
-    Reservation findReservationByPassengerLastName(String lastName);
+    Optional<Reservation> findReservationByPassengerLastName(String lastName);
 
 
 }

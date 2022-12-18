@@ -11,9 +11,9 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:8080/user/modify_fN?first_name=bettaoui
+POST http://localhost:8080/user/modify_lN?last_name=bettaoui
 Content-Type: application/json
 
 {
-  "id" : "6afdc8da-3d5a-4e30-8b9c-c85d76d2cd85"
+  "id" : "8e098445-9899-4e09-81f1-5c01b70dc5c4"
 }

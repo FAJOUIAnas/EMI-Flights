@@ -1,13 +1,11 @@
-package ma.ac.emi.ginfo.hg.emiflights.entities;
+package ma.ac.emi.ginfo.hg.emiflights.entities.ref;
 
-import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import lombok.*;
-import ma.ac.emi.ginfo.hg.emiflights.entities.ref.Civility;
+import ma.ac.emi.ginfo.hg.emiflights.entities.Plane;
 import org.hibernate.Hibernate;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -16,35 +14,32 @@ import java.util.UUID;
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class User implements Serializable {
+public class ClassSeat implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Nonnull
-    private String firstName;
-
-    @Nonnull
-    private String lastName;
-
-    @Nonnull
-    private String email;
-
     @ManyToOne
-    private Civility civility;
+    private Class _class;
 
-    @Nonnull
-    private LocalDate birthDate;
+    private int numberOfSeats;
 
-    @Nonnull
-    private String adress;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Plane plane;
+
+    public ClassSeat(Class _class, int numberOfSeats, Plane plane) {
+        this._class = _class;
+        this.numberOfSeats = numberOfSeats;
+        this.plane = plane;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        User user = (User) o;
-        return id != null && Objects.equals(id, user.id);
+        ClassSeat classSeat = (ClassSeat) o;
+        return id != null && Objects.equals(id, classSeat.id);
     }
 
     @Override

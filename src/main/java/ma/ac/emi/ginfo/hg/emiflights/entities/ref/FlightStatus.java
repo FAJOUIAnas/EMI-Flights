@@ -21,5 +21,4 @@ public class FlightStatus implements Serializable {
 
     @Nonnull
     private String label;
-
 }

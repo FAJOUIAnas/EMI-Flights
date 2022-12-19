@@ -7,6 +7,8 @@ import ma.ac.emi.ginfo.hg.emiflights.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -98,7 +100,7 @@ public class FlightGenericService {
     }
 
     public void deleteFlightGeneric(UUID id) {
-        List<Flight> flights = flightRepository.findAllByFlightGeneric_IdAndDepartureDateIsAfter(id);
+        List<Flight> flights = flightRepository.findAllByFlightGeneric_IdAndDepartureDateIsAfter(id, Date.valueOf(LocalDate.now()));
         for(Flight flight : flights) {
             flightRepository.deleteFlightById(flight.getId());
         }

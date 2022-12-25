@@ -8,15 +8,15 @@ POST http://localhost:8080/airport/add
 Content-Type: application/json
 
 {
-  "code" : "CMN",
-  "label" : "Mohammed V International Airport",
-  "city" : "Casablanca",
-  "country" : "Morocco"
+  "code" : "CDG",
+  "label" : "Paris Charles de Gaulle Airport",
+  "city" : "Paris",
+  "country" : "France"
 }
 
-###FIND BY ID
+###FIND BY CODE
 
-GET http://localhost:8080/airport/find/043f1af6-c07f-4a10-bff9-d59f98977eed
+GET http://localhost:8080/airport/find/CMN
 
 ###UPDATE
 
@@ -24,11 +24,12 @@ PUT http://localhost:8080/airport/update
 Content-Type: application/json
 
 {
-  "id" : "424906cd-e688-466f-94d1-a1586472e5b2",
-  "model" : "Boeing 737",
-  "companyName" : "Boeing"
+  "code" : "CDG",
+  "label" : "Paris Charles de Gaulle Airport",
+  "city" : "Paris",
+  "country" : "France"
 }
 
 ###DELETE
 
-DELETE http://localhost:8080/airport/delete/7f98ef07-972c-4a10-a829-09878bb145ef
+DELETE http://localhost:8080/airport/delete/CDG

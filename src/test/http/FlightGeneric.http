@@ -1,0 +1,70 @@
+###FIND ALL
+
+GET http://localhost:8080/flightgeneric/all
+
+###ADD
+
+POST http://localhost:8080/flightgeneric/add
+Content-Type: application/json
+
+{
+  "departureAirport" : {
+    "code" : "CMN"
+  },
+  "arrivalAirport" : {
+    "code" : "CDG"
+  },
+  "departureHour" : "10:00",
+  "arrivalHour" : "12:15",
+  "basePrice" : 1000.25,
+  "day" : {
+    "code" : "MON"
+  },
+  "plane" : {
+    "id" : "2ac85539-683a-4393-87e6-b24e31bb8edb"
+  },
+  "departureTerminal" : {
+    "code" : "CMN-1"
+  },
+  "arrivalTerminal" : {
+    "code" : "CDG-1"
+  }
+}
+
+###FIND BY ID
+
+GET http://localhost:8080/flightgeneric/find/205c83b4-9e1f-47ad-b3f1-e756c76f4bf0
+
+###UPDATE
+
+PUT http://localhost:8080/flightgeneric/update
+Content-Type: application/json
+
+{
+  "id" : "062ca00b-60f7-4c49-b197-f09810bac8e2",
+  "departureAirport" : {
+    "code" : "CMN"
+  },
+  "arrivalAirport" : {
+    "code" : "CDG"
+  },
+  "departureHour" : "10:00",
+  "arrivalHour" : "12:15",
+  "basePrice" : 1000.25,
+  "day" : {
+    "code" : "MON"
+  },
+  "plane" : {
+    "id" : "2ac85539-683a-4393-87e6-b24e31bb8edb"
+  },
+  "departureTerminal" : {
+    "code" : "CMN-1"
+  },
+  "arrivalTerminal" : {
+    "code" : "CDG-1"
+  }
+}
+
+###DELETE
+
+DELETE http://localhost:8080/flightgeneric/delete/205c83b4-9e1f-47ad-b3f1-e756c76f4bf0

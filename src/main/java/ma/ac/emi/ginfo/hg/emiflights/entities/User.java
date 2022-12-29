@@ -39,6 +39,12 @@ public class User implements Serializable {
     @Nonnull
     private String adress;
 
+    @Nonnull
+    private String password;
+
+    @Nonnull
+    private String username;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

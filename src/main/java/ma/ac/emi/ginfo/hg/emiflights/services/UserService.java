@@ -61,4 +61,16 @@ public class UserService {
         userRepository.save(user);
         return user;
     }
+
+    public User modifyUserUsername(User user, String username){
+        user.setUsername(username);
+        userRepository.save(user);
+        return user;
+    }
+
+    public User modifyUserPassword(User user, String password){
+        user.setPassword(password);
+        userRepository.save(user);
+        return user;
+    }
 }

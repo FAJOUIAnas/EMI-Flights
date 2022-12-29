@@ -12,6 +12,7 @@ import ma.ac.emi.ginfo.hg.emiflights.repositories.FlightStatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -45,7 +46,7 @@ public class FlightService {
     }
 
     public Flight updateFlight(Flight flight) {
-        Flight flightSearched = flightRepository.findFlightById(flight.getId())
+        flightRepository.findFlightById(flight.getId())
                 .orElseThrow(() -> new FlightNotFoundException("Flight by id " + flight.getId() + " was not found"));
 
         FlightGeneric flightGeneric = flightGenericRepository.findFlightGenericById(flight.getFlightGeneric().getId())
@@ -66,5 +67,9 @@ public class FlightService {
 
     public void deleteFlight(UUID id) {
         flightRepository.deleteFlightById(id);
+    }
+
+    public List<Flight> searchFlights(String depAirport, String arrAirport, Date depDate) {
+        return flightRepository.findByFlightGeneric_DepartureAirport_CodeAndFlightGeneric_ArrivalAirport_CodeAndDepartureDate(depAirport, arrAirport, depDate);
     }
 }

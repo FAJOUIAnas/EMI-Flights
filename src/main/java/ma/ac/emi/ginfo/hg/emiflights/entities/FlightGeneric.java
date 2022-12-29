@@ -1,6 +1,6 @@
 package ma.ac.emi.ginfo.hg.emiflights.entities;
 
-import jakarta.annotation.Nonnull;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +9,7 @@ import ma.ac.emi.ginfo.hg.emiflights.entities.ref.Day;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Time;
+import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -22,17 +22,17 @@ public class FlightGeneric implements Serializable {
     private UUID id;
 
     @OneToOne
-    @Nonnull
     private Airport departureAirport;
 
     @OneToOne
-    @Nonnull
     private Airport arrivalAirport;
 
     @Temporal(TemporalType.TIME)
-    private Time departureHour;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="HH:mm")
+    private Date departureHour;
     @Temporal(TemporalType.TIME)
-    private Time arrivalHour;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="HH:mm")
+    private Date arrivalHour;
 
     private BigDecimal basePrice;
 
@@ -43,10 +43,8 @@ public class FlightGeneric implements Serializable {
     private Plane plane;
 
     @OneToOne
-    @Nonnull
     private Terminal departureTerminal;
 
     @OneToOne
-    @Nonnull
     private Terminal arrivalTerminal;
 }

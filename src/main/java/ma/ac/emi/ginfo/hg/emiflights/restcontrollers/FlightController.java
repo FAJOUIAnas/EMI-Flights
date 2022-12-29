@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -47,5 +48,11 @@ public class FlightController {
     public ResponseEntity<?> deleteFlight(@PathVariable("id") UUID id) {
         flightService.deleteFlight(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Flight>> getFlightsBySearch(String depAirport, String arrAirport, Date depDate) {
+        List<Flight> flights = flightService.searchFlights(depAirport, arrAirport, depDate);
+        return new ResponseEntity<>(flights, HttpStatus.OK);
     }
 }

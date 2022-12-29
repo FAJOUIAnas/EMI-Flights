@@ -8,8 +8,8 @@ POST http://localhost:8080/terminal/add
 Content-Type: application/json
 
 {
-  "code" : "CDG-1",
-  "label" : "Paris Charles de Gaulle Airport Terminal 1",
+  "code" : "CDG-2B",
+  "label" : "Paris Charles de Gaulle Airport Terminal 2B",
   "airport" : {
     "code" : "CDG"
   }

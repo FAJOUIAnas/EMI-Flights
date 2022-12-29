@@ -15,7 +15,9 @@ public interface FlightRepository extends JpaRepository<Flight, UUID> {
 
     @Transactional
     void deleteFlightById(UUID id);
-    List<Flight> findAllByFlightGeneric_IdAndDepartureDateIsAfter(UUID flightGenericId, Date date);
+
+    @Query("select f from Flight f where f.flightGeneric.id = ?1 and f.departureDate > ?2")
+    List<Flight> findByFlightGeneric_IdAndDepartureDateAfter(UUID id, Date departureDate);
 
     @Query("""
             select f from Flight f

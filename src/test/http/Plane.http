@@ -8,8 +8,8 @@ POST http://localhost:8080/plane/add
 Content-Type: application/json
 
 {
-  "model" : "Boeing 737",
-  "companyName" : "Boeing"
+  "model" : "Airbus A380",
+  "companyName" : "Airbus"
 }
 
 ###FIND BY ID

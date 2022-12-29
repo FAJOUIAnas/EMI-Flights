@@ -8,8 +8,8 @@ POST http://localhost:8080/airport/add
 Content-Type: application/json
 
 {
-  "code" : "CDG",
-  "label" : "Paris Charles de Gaulle Airport",
+  "code" : "ORY",
+  "label" : "Paris Orly Airport ",
   "city" : "Paris",
   "country" : "France"
 }

@@ -62,21 +62,50 @@ public class FlightGenericService {
 
         FlightGeneric flightGenericSaved = flightGenericRepository.save(flightGeneric);
 
-        long currentDate = System.currentTimeMillis();
         FlightStatus scheduled = flightStatusRepository.findFlightStatusByCode("SCHD")
                 .orElseThrow(() -> new FlightStatusNotFoundException("FlightStatus by code SCHD was not found"));
 
-        for(int d = 2; d <= 31; d += 7) {
-            Flight flight = new Flight();
+        long currentDate = System.currentTimeMillis();
+
+        java.sql.Date date = new java.sql.Date(currentDate);
+        date.setYear(123);
+
+        Flight flight;
+
+        int k = 0;
+        switch (flightGenericSaved.getDay().getLabel()) {
+            case "Sunday":
+                k = 1;
+                break;
+            case "Monday":
+                k = 2;
+                break;
+            case "Tuesday":
+                k = 3;
+                break;
+            case "Wednesday":
+                k = 4;
+                break;
+            case "Thursday":
+                k = 5;
+                break;
+            case "Friday":
+                k = 6;
+                break;
+            case "Saturday":
+                k = 7;
+                break;
+        }
+        for(int d = k; d <= 365; d += 7) {
+            flight = new Flight();
             flight.setFlightGeneric(flightGenericSaved);
-            java.sql.Date date = new java.sql.Date(currentDate);
-            date.setYear(123);
             date.setMonth(Calendar.JANUARY);
             date.setDate(d);
             flight.setDepartureDate(date);
             flight.setFlightStatus(scheduled);
             flightRepository.save(flight);
         }
+
         return flightGenericSaved;
     }
 
@@ -112,6 +141,12 @@ public class FlightGenericService {
                 .orElseThrow(() -> new TerminalNotFoundException("Terminal by code " + flightGeneric.getArrivalTerminal().getCode() + " was not found"));
         flightGeneric.setArrivalTerminal(arrivalTerminal);
 
+        List<Flight> flights = flightRepository.findByFlightGeneric_IdAndDepartureDateAfter(flightGeneric.getId(), Date.valueOf(LocalDate.now()));
+        for(Flight flight : flights) {
+            flight.setFlightGeneric(flightGeneric);
+            flightRepository.save(flight);
+        }
+
         return flightGenericRepository.save(flightGeneric);
     }
 
@@ -121,7 +156,7 @@ public class FlightGenericService {
     }
 
     public void deleteFlightGeneric(UUID id) {
-        List<Flight> flights = flightRepository.findAllByFlightGeneric_IdAndDepartureDateIsAfter(id, Date.valueOf(LocalDate.now()));
+        List<Flight> flights = flightRepository.findByFlightGeneric_IdAndDepartureDateAfter(id, Date.valueOf(LocalDate.now()));
         for(Flight flight : flights) {
             flightRepository.deleteFlightById(flight.getId());
         }

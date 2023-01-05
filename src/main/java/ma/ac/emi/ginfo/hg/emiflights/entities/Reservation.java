@@ -11,6 +11,7 @@ import org.hibernate.Hibernate;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -27,11 +28,14 @@ public class Reservation implements Serializable {
     @Nonnull
     private String code;
 
-    @Nonnull
-    private LocalDate creationDate;
 
+    @Temporal(TemporalType.DATE)
     @Nonnull
-    private LocalDate modificationDate;
+    private Date creationDate;
+
+    @Temporal(TemporalType.DATE)
+    @Nonnull
+    private Date modificationDate;
 
     @Nonnull
     private String passengerLastName;

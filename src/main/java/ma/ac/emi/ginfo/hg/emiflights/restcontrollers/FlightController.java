@@ -51,8 +51,8 @@ public class FlightController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Flight>> getFlightsBySearch(String depAirport, String arrAirport, Date depDate) {
-        List<Flight> flights = flightService.searchFlights(depAirport, arrAirport, depDate);
+    public ResponseEntity<List<Flight>> getFlightsBySearch(String depAirport, String arrAirport, Date depDate, String classCode, int numberOfPassengers) {
+        List<Flight> flights = flightService.searchFlights(depAirport, arrAirport, depDate, classCode, numberOfPassengers);
         return new ResponseEntity<>(flights, HttpStatus.OK);
     }
 }

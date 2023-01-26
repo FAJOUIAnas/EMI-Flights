@@ -1,7 +1,6 @@
 package ma.ac.emi.ginfo.hg.emiflights.services;
 
 import ma.ac.emi.ginfo.hg.emiflights.entities.Flight;
-import ma.ac.emi.ginfo.hg.emiflights.entities.FlightGeneric;
 import ma.ac.emi.ginfo.hg.emiflights.entities.Reservation;
 import ma.ac.emi.ginfo.hg.emiflights.entities.ref.AgeGroup;
 import ma.ac.emi.ginfo.hg.emiflights.entities.ref.Civility;
@@ -13,7 +12,6 @@ import ma.ac.emi.ginfo.hg.emiflights.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -47,9 +45,9 @@ public class ReservationService {
                 .orElseThrow(() -> new CivilityNotFoundException("AgeGroup by code " + reservation.getPassengerAgeGroup().getCode() + " was not found"));
         reservation.setPassengerAgeGroup(passengerAgeGroup);
 
-        Class _class = classRepository.findClassByCode(reservation.get_class().getCode())
-                .orElseThrow(() -> new ClassNotFoundException("Class by code " + reservation.get_class().getCode() + " was not found"));
-        reservation.set_class(_class);
+        Class _class = classRepository.findClassByCode(reservation.getSeatClass().getCode())
+                .orElseThrow(() -> new ClassNotFoundException("Class by code " + reservation.getSeatClass().getCode() + " was not found"));
+        reservation.setSeatClass(_class);
 
         ReservationStatus reservationStatus = reservationStatusRepository.findReservationStatusByCode(reservation.getReservationStatus().getCode())
                 .orElseThrow(() -> new ReservationStatusNotFoundException("Reservation by code " + reservation.getReservationStatus().getCode() + " was not found"));

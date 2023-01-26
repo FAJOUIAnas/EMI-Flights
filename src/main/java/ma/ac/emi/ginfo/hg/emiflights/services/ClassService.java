@@ -38,7 +38,7 @@ public class ClassService {
     }
 
     public void deleteClassByCode(String code) {
-        List<Seats> seats = seatsRepository.findSeatsBy_class_Code(code);
+        List<Seats> seats = seatsRepository.findBySeatClass_Code(code);
         for(Seats seat : seats) {
             seatsRepository.deleteSeatsById(seat.getId());
         }

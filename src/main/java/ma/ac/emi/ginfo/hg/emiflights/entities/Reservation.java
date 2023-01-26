@@ -10,7 +10,6 @@ import ma.ac.emi.ginfo.hg.emiflights.entities.ref.ReservationStatus;
 import org.hibernate.Hibernate;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
@@ -53,7 +52,7 @@ public class Reservation implements Serializable {
 
     @Nonnull
     @ManyToOne
-    private Class _class;
+    private Class seatClass;
 
     @Nonnull
     private String seatNumber;

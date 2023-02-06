@@ -2,7 +2,6 @@ package ma.ac.emi.ginfo.hg.emiflights.entities;
 
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

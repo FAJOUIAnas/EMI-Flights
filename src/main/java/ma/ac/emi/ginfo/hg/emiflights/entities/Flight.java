@@ -26,7 +26,7 @@ public class Flight implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date departureDate;
 
-    private Boolean isFull;
+    private Boolean isFull = false;
 
     @ManyToOne
     private FlightStatus flightStatus;

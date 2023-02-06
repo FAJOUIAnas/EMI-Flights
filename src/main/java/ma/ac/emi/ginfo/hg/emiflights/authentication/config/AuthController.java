@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
@@ -22,21 +23,37 @@ public class AuthController {
     private Map<UserDetails, String> generatedTokens = new HashMap<>();
 
     @PostMapping("/authenticate")
-    public ResponseEntity<String> authenticate(@RequestBody AuthenticationRequest request){
+    public ResponseEntity<Response> authenticate(@RequestBody AuthenticationRequest request){
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
         );
         final UserDetails userDetails = userDao.findUserByEmail(request.getEmail());
         if (userDetails != null){
             if (generatedTokens.containsKey(userDetails)){
-                return ResponseEntity.ok(this.generatedTokens.get(userDetails));
+                return ResponseEntity.ok(new Response(this.generatedTokens.get(userDetails)));
             }
             else{
                 String token = jwtUtils.generateToken(userDetails);
                 this.generatedTokens.put(userDetails, token);
-                return ResponseEntity.ok(token);
+                return ResponseEntity.ok(new Response(token));
             }
         }
-        return ResponseEntity.status(400).body("Some error has occurred");
+        return (ResponseEntity<Response>) ResponseEntity.badRequest();
+    }
+}
+
+class Response {
+    private String token;
+
+    public Response(String token) {
+        this.token = token;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

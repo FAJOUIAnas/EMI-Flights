@@ -6,13 +6,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 @Repository
 public class UserDao {
-    private final static List<UserDetails> APPLICATION_USERS = Arrays.asList(
+    private static List<UserDetails> APPLICATION_USERS = new ArrayList<>(Arrays.asList(
             new User("saif", "password",
                     Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))
             ),
@@ -24,7 +25,16 @@ public class UserDao {
             ),new User("houssam", "password_4",
                     Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))
             )
+    )
     );
+
+    public static List<UserDetails> getApplicationUsers() {
+        return APPLICATION_USERS;
+    }
+
+    public static void setApplicationUsers(List<UserDetails> applicationUsers) {
+        APPLICATION_USERS = applicationUsers;
+    }
 
     public UserDetails findUserByEmail(String email){
         return APPLICATION_USERS

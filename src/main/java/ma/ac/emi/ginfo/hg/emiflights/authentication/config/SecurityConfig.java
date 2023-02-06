@@ -52,8 +52,8 @@ public class SecurityConfig {
                 .permitAll()
             );
         http.authorizeHttpRequests()
-                .anyRequest()
-                .authenticated();
+                .anyRequest().permitAll();
+                //.fullyAuthenticated();
         http.authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAthFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();

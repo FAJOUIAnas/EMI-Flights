@@ -32,6 +32,9 @@ public class Reservation implements Serializable {
 
     @Nonnull
     private LocalDate modificationDate;
+    @Nonnull
+    @ManyToOne
+    private User user;
 
     @Nonnull
     private String passengerLastName;

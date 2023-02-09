@@ -30,6 +30,4 @@ public interface FlightRepository extends JpaRepository<Flight, UUID> {
     List<Flight> findByFlightGeneric_DepartureAirport_CodeAndFlightGeneric_ArrivalAirport_CodeAndDepartureDateAndIsFullFalse(String code, String code1, Date departureDate);
 
 
-
-
 }

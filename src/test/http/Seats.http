@@ -9,12 +9,12 @@ Content-Type: application/json
 
 {
   "plane" : {
-    "id" : "76164545-9825-47dc-8444-d86a734c2f36"
+    "id" : "41924985-0a30-4ad7-b79a-c12059e7dbea"
   },
   "seatClass" : {
-    "code" : "FST"
+    "code" : "ECO"
   },
-  "numberOfSeats" : 16
+  "numberOfSeats" : 230
 }
 
 ###FIND BY ID

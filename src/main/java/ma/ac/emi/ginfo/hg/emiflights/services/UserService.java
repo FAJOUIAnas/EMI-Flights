@@ -1,7 +1,6 @@
 package ma.ac.emi.ginfo.hg.emiflights.services;
 
 import ma.ac.emi.ginfo.hg.emiflights.entities.User;
-import ma.ac.emi.ginfo.hg.emiflights.repositories.FlightRepository;
 import ma.ac.emi.ginfo.hg.emiflights.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,12 +45,6 @@ public class UserService {
 
     public User modifyUserEmail(User user, String email){
         user.setEmail(email);
-        userRepository.save(user);
-        return user;
-    }
-
-    public User modifyUserAdress(User user, String adress){
-        user.setAdress(adress);
         userRepository.save(user);
         return user;
     }

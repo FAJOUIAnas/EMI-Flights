@@ -23,10 +23,18 @@ public class Reservation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-
     @Nonnull
     private String code;
 
+    @ToString.Exclude
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "flight_id", nullable = false)
+    private Flight flight;
+
+    @ToString.Exclude
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Temporal(TemporalType.DATE)
     @Nonnull
@@ -63,9 +71,6 @@ public class Reservation implements Serializable {
 
     @Nonnull
     private double price;
-
-    @ManyToOne
-    private Flight flight;
 
     @Override
     public boolean equals(Object o) {

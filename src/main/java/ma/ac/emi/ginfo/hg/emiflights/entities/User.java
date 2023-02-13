@@ -37,7 +37,7 @@ public class User implements Serializable {
     private LocalDate birthDate;
 
     @Nonnull
-    private String adress;
+    private String address;
 
     @Override
     public boolean equals(Object o) {

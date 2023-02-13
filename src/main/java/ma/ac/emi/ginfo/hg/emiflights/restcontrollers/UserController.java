@@ -19,15 +19,24 @@ import java.util.UUID;
 @RequestMapping("/user")
 public class UserController {
     private final UserService userService;
+    private final UserDao userDao;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UserDao userDao) {
         this.userService = userService;
+        this.userDao = userDao;
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.findAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
+    @GetMapping("/findByCre/{username}/{password}")
+    public ResponseEntity<User> findUserByCre(@PathVariable("username") String username,
+                                           @PathVariable("password") String password) {
+        User user =  userService.findUserByCredentials(username, password);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -38,12 +47,15 @@ public class UserController {
 
     @PostMapping("/add")
     public ResponseEntity<User> addUser(@RequestBody User user) {
+        user.setAuthorities(Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")));
         User newUser = userService.addUser(user);
         List<UserDetails> appUsers = UserDao.getApplicationUsers();
+
         appUsers.add(new org.springframework.security.core.userdetails.User(
                 user.getUsername(), user.getPassword(),
                 Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))
         ));
+
         UserDao.setApplicationUsers(appUsers);
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }

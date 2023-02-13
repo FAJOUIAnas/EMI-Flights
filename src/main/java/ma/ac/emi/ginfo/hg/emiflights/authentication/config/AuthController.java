@@ -49,7 +49,10 @@ public class AuthController {
         if (userDetails != null){
             if (generatedTokens.containsKey(userDetails)){
                 return ResponseEntity.ok(new Response(this.generatedTokens.get(userDetails),
-                        UserDao.getTokens(), userDetails_copy));
+                        UserDao.getTokens(), userDetails_copy,
+                        UserDao.getProfilePicsUsers().get(
+                                UserDao.getApplicationUsers().indexOf(userDetails)
+                        )));
             }
             else{
                 String token = jwtUtils.generateToken(userDetails);
@@ -57,7 +60,11 @@ public class AuthController {
                 List<String> tokens = UserDao.getTokens();
                 tokens.add(token);
                 UserDao.setTokens(tokens);
-                return ResponseEntity.ok(new Response(token, UserDao.getTokens(),userDetails_copy));
+                return ResponseEntity.ok(new Response(token,
+                        UserDao.getTokens(), userDetails_copy,
+                        UserDao.getProfilePicsUsers().get(
+                                UserDao.getApplicationUsers().indexOf(userDetails)
+                        )));
             }
         }
         return (ResponseEntity<Response>) ResponseEntity.badRequest();
@@ -68,11 +75,21 @@ class Response {
     private String token;
     private UserDetails userDetails;
     private List<String> tokens;
+    private String image;
 
-    public Response(String token, List<String> tokens, UserDetails userDetails) {
+    public Response(String token, List<String> tokens, UserDetails userDetails, String image) {
         this.token = token;
         this.tokens = tokens;
         this.userDetails = userDetails;
+        this.image = image;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getToken() {

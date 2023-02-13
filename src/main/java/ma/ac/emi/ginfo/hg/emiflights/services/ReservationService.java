@@ -2,14 +2,16 @@ package ma.ac.emi.ginfo.hg.emiflights.services;
 
 import ma.ac.emi.ginfo.hg.emiflights.entities.Flight;
 import ma.ac.emi.ginfo.hg.emiflights.entities.Reservation;
-import ma.ac.emi.ginfo.hg.emiflights.exception.FlightNotFoundException;
-import ma.ac.emi.ginfo.hg.emiflights.exception.ReservationNotFoundException;
-import ma.ac.emi.ginfo.hg.emiflights.repositories.FlightRepository;
-import ma.ac.emi.ginfo.hg.emiflights.repositories.ReservationRepository;
+import ma.ac.emi.ginfo.hg.emiflights.entities.ref.AgeGroup;
+import ma.ac.emi.ginfo.hg.emiflights.entities.ref.Civility;
+import ma.ac.emi.ginfo.hg.emiflights.entities.ref.Class;
+import ma.ac.emi.ginfo.hg.emiflights.entities.ref.ReservationStatus;
+import ma.ac.emi.ginfo.hg.emiflights.exception.*;
+import ma.ac.emi.ginfo.hg.emiflights.exception.ClassNotFoundException;
+import ma.ac.emi.ginfo.hg.emiflights.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,25 +19,44 @@ import java.util.UUID;
 public class ReservationService {
     private final ReservationRepository reservationRepository;
     private final FlightRepository flightRepository;
+    private final CivilityRepository civilityRepository;
+    private final AgeGroupRepository ageGroupRepository;
+    private final ClassRepository classRepository;
+    private final ReservationStatusRepository reservationStatusRepository;
 
 
     @Autowired
-    public ReservationService(ReservationRepository reservationRepository, FlightRepository flightRepository){
+    public ReservationService(ReservationRepository reservationRepository, FlightRepository flightRepository, CivilityRepository civilityRepository, AgeGroupRepository ageGroupRepository, ClassRepository classRepository, ReservationStatusRepository reservationStatusRepository){
         this.reservationRepository = reservationRepository;
         this.flightRepository = flightRepository;
-    }
-
-    public void deleteReservation(UUID id) {
-        reservationRepository.deleteReservationById(id);
-    }
-
-    public Reservation modifyReservationSeat(String seatNumber, Reservation reservation){
-        reservation.setSeatNumber(seatNumber);
-        reservationRepository.save(reservation);
-        return reservation;
+        this.civilityRepository = civilityRepository;
+        this.ageGroupRepository = ageGroupRepository;
+        this.classRepository = classRepository;
+        this.reservationStatusRepository = reservationStatusRepository;
     }
 
     public Reservation addReservation(Reservation reservation) {
+
+        Civility passengerCivility = civilityRepository.findCivilityByCode(reservation.getPassengerCivility().getCode())
+                .orElseThrow(() -> new CivilityNotFoundException("Civility by code " + reservation.getPassengerCivility().getCode() + " was not found"));
+        reservation.setPassengerCivility(passengerCivility);
+
+        AgeGroup passengerAgeGroup = ageGroupRepository.findAgeGroupByCode(reservation.getPassengerAgeGroup().getCode())
+                .orElseThrow(() -> new CivilityNotFoundException("AgeGroup by code " + reservation.getPassengerAgeGroup().getCode() + " was not found"));
+        reservation.setPassengerAgeGroup(passengerAgeGroup);
+
+        Class _class = classRepository.findClassByCode(reservation.getSeatClass().getCode())
+                .orElseThrow(() -> new ClassNotFoundException("Class by code " + reservation.getSeatClass().getCode() + " was not found"));
+        reservation.setSeatClass(_class);
+
+        ReservationStatus reservationStatus = reservationStatusRepository.findReservationStatusByCode(reservation.getReservationStatus().getCode())
+                .orElseThrow(() -> new ReservationStatusNotFoundException("Reservation by code " + reservation.getReservationStatus().getCode() + " was not found"));
+        reservation.setReservationStatus(reservationStatus);
+
+        Flight flight = flightRepository.findFlightById(reservation.getFlight().getId())
+                .orElseThrow(() -> new FlightNotFoundException("Flight by id " + reservation.getFlight().getId() + " was not found"));
+        reservation.setFlight(flight);
+
         return reservationRepository.save(reservation);
     }
 
@@ -53,30 +74,14 @@ public class ReservationService {
                 .orElseThrow(() -> new ReservationNotFoundException("Reservation by code " + code + "was not found"));
     }
 
-    public Reservation findReservationByCreationDate(LocalDate creationDate){
-        return reservationRepository.findReservationByCreationDate(creationDate)
-                .orElseThrow(() -> new ReservationNotFoundException("Reservation by creationDate " + creationDate + "was not found"));
+    public void deleteReservation(UUID id) {
+        reservationRepository.deleteReservationById(id);
     }
 
-    public Reservation findReservationByModificationDate(LocalDate modificationDate){
-        return reservationRepository.findReservationByModificationDate(modificationDate)
-                .orElseThrow(() -> new ReservationNotFoundException("Reservation by modificationDate " + modificationDate + "was not found"));
+    public Reservation modifyReservationSeat(String seatNumber, Reservation reservation){
+        reservation.setSeatNumber(seatNumber);
+        reservationRepository.save(reservation);
+        return reservation;
     }
 
-    public Reservation findReservationByFlight_id(UUID flight_id){
-        Flight flight = flightRepository.findFlightById(flight_id)
-                .orElseThrow(() -> new FlightNotFoundException("Flight by id " + flight_id + "was not found"));
-        return reservationRepository.findReservationByFlight(flight)
-                .orElseThrow(() -> new ReservationNotFoundException("Reservation by flight " + flight + "was not found"));
-    }
-
-    public Reservation findReservationByPassengerFirstName(String firstName){
-        return reservationRepository.findReservationByPassengerFirstName(firstName)
-                .orElseThrow(() -> new ReservationNotFoundException("Reservation by firstName " + firstName + "was not found"));
-    }
-
-    public Reservation findReservationByPassengerLastName(String lastName){
-        return reservationRepository.findReservationByPassengerLastName(lastName)
-                .orElseThrow(() -> new ReservationNotFoundException("Reservation by lastName " + lastName + "was not found"));
-    }
 }

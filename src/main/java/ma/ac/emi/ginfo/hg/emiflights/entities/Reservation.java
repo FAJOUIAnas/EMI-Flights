@@ -10,7 +10,7 @@ import ma.ac.emi.ginfo.hg.emiflights.entities.ref.ReservationStatus;
 import org.hibernate.Hibernate;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -23,18 +23,26 @@ public class Reservation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-
     @Nonnull
     private String code;
 
-    @Nonnull
-    private LocalDate creationDate;
+    @ToString.Exclude
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "flight_id", nullable = false)
+    private Flight flight;
 
-    @Nonnull
-    private LocalDate modificationDate;
-    @Nonnull
+    @ToString.Exclude
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
+
+    @Temporal(TemporalType.DATE)
+    @Nonnull
+    private Date creationDate;
+
+    @Temporal(TemporalType.DATE)
+    @Nonnull
+    private Date modificationDate;
 
     @Nonnull
     private String passengerLastName;
@@ -52,7 +60,7 @@ public class Reservation implements Serializable {
 
     @Nonnull
     @ManyToOne
-    private Class _class;
+    private Class seatClass;
 
     @Nonnull
     private String seatNumber;
@@ -63,9 +71,6 @@ public class Reservation implements Serializable {
 
     @Nonnull
     private double price;
-
-    @ManyToOne
-    private Flight flight;
 
     @Override
     public boolean equals(Object o) {

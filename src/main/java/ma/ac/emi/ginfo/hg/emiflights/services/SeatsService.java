@@ -28,9 +28,9 @@ public class SeatsService {
     }
 
     public Seats addSeats(Seats seats) {
-        Class _class = classRepository.findClassByCode(seats.get_class().getCode())
-                .orElseThrow(() -> new SeatsNotFoundException("Class by code " + seats.get_class().getCode() + " was not found"));
-        seats.set_class(_class);
+        Class _class = classRepository.findClassByCode(seats.getSeatClass().getCode())
+                .orElseThrow(() -> new SeatsNotFoundException("Class by code " + seats.getSeatClass().getCode() + " was not found"));
+        seats.setSeatClass(_class);
 
         Plane plane = planeRepository.findPlaneById(seats.getPlane().getId())
                 .orElseThrow(() -> new PlaneNotFoundException("Plane by id " + seats.getPlane().getId() + " was not found"));
@@ -47,9 +47,9 @@ public class SeatsService {
         Seats seatsSearched = seatsRepository.findSeatsById(seats.getId())
                 .orElseThrow(() -> new SeatsNotFoundException("Seats by id " + seats.getId() + " was not found"));
 
-        Class _class = classRepository.findClassByCode(seats.get_class().getCode())
-                .orElseThrow(() -> new SeatsNotFoundException("Class by code " + seats.get_class().getCode() + " was not found"));
-        seats.set_class(_class);
+        Class _class = classRepository.findClassByCode(seats.getSeatClass().getCode())
+                .orElseThrow(() -> new SeatsNotFoundException("Class by code " + seats.getSeatClass().getCode() + " was not found"));
+        seats.setSeatClass(_class);
 
         Plane plane = planeRepository.findPlaneById(seats.getPlane().getId())
                 .orElseThrow(() -> new PlaneNotFoundException("Plane by id " + seats.getPlane().getId() + " was not found"));

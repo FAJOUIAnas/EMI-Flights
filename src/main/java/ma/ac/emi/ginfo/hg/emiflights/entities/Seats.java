@@ -26,7 +26,7 @@ public class Seats implements Serializable {
 
     @ManyToOne
     @Nonnull
-    private Class _class;
+    private Class seatClass;
 
     private int numberOfSeats;
 

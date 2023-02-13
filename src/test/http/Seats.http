@@ -9,12 +9,12 @@ Content-Type: application/json
 
 {
   "plane" : {
-    "id" : "7f98ef07-972c-4a10-a829-09878bb145ef"
+    "id" : "41924985-0a30-4ad7-b79a-c12059e7dbea"
   },
-  "_class" : {
+  "seatClass" : {
     "code" : "ECO"
   },
-  "numberOfSeats" : 200
+  "numberOfSeats" : 230
 }
 
 ###FIND BY ID
@@ -31,7 +31,7 @@ Content-Type: application/json
   "plane" : {
     "id" : "424906cd-e688-466f-94d1-a1586472e5b2"
   },
-  "_class" : {
+  "seatClass" : {
     "code" : "ECO"
   },
   "numberOfSeats" : 100

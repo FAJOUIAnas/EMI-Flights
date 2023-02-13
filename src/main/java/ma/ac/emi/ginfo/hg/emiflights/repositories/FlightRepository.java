@@ -24,5 +24,10 @@ public interface FlightRepository extends JpaRepository<Flight, UUID> {
             where f.flightGeneric.departureAirport.code = ?1 and f.flightGeneric.arrivalAirport.code = ?2 and f.departureDate = ?3""")
     List<Flight> findByFlightGeneric_DepartureAirport_CodeAndFlightGeneric_ArrivalAirport_CodeAndDepartureDate(String code, String code1, Date departureDate);
 
+    @Query("""
+            select f from Flight f
+            where f.flightGeneric.departureAirport.code = ?1 and f.flightGeneric.arrivalAirport.code = ?2 and f.departureDate = ?3 and f.isFull = false""")
+    List<Flight> findByFlightGeneric_DepartureAirport_CodeAndFlightGeneric_ArrivalAirport_CodeAndDepartureDateAndIsFullFalse(String code, String code1, Date departureDate);
+
 
 }

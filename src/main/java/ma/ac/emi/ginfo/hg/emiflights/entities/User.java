@@ -39,7 +39,7 @@ public class User implements Serializable, UserDetails {
     private LocalDate birthDate;
 
     @Nonnull
-    private String adress;
+    private String address;
 
     @Nonnull
     private String username;

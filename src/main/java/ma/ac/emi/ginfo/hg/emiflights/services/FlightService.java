@@ -2,17 +2,17 @@ package ma.ac.emi.ginfo.hg.emiflights.services;
 
 import ma.ac.emi.ginfo.hg.emiflights.entities.Flight;
 import ma.ac.emi.ginfo.hg.emiflights.entities.FlightGeneric;
+import ma.ac.emi.ginfo.hg.emiflights.entities.Reservation;
 import ma.ac.emi.ginfo.hg.emiflights.entities.ref.FlightStatus;
 import ma.ac.emi.ginfo.hg.emiflights.exception.FlightGenericNotFoundException;
 import ma.ac.emi.ginfo.hg.emiflights.exception.FlightNotFoundException;
 import ma.ac.emi.ginfo.hg.emiflights.exception.FlightStatusNotFoundException;
-import ma.ac.emi.ginfo.hg.emiflights.repositories.FlightGenericRepository;
-import ma.ac.emi.ginfo.hg.emiflights.repositories.FlightRepository;
-import ma.ac.emi.ginfo.hg.emiflights.repositories.FlightStatusRepository;
+import ma.ac.emi.ginfo.hg.emiflights.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,12 +21,16 @@ public class FlightService {
     private final FlightRepository flightRepository;
     private final FlightGenericRepository flightGenericRepository;
     private final FlightStatusRepository flightStatusRepository;
+    private final ReservationRepository reservationRepository;
+    private final SeatsRepository seatsRepository;
 
     @Autowired
-    public FlightService(FlightRepository flightRepository, FlightGenericRepository flightGenericRepository, FlightStatusRepository flightStatusRepository) {
+    public FlightService(FlightRepository flightRepository, FlightGenericRepository flightGenericRepository, FlightStatusRepository flightStatusRepository, ReservationRepository reservationRepository, SeatsRepository seatsRepository) {
         this.flightRepository = flightRepository;
         this.flightGenericRepository = flightGenericRepository;
         this.flightStatusRepository = flightStatusRepository;
+        this.reservationRepository = reservationRepository;
+        this.seatsRepository = seatsRepository;
     }
 
     public Flight addFlight(Flight flight) {
@@ -69,7 +73,16 @@ public class FlightService {
         flightRepository.deleteFlightById(id);
     }
 
-    public List<Flight> searchFlights(String depAirport, String arrAirport, Date depDate) {
-        return flightRepository.findByFlightGeneric_DepartureAirport_CodeAndFlightGeneric_ArrivalAirport_CodeAndDepartureDate(depAirport, arrAirport, depDate);
+    public List<Flight> searchFlights(String depAirport, String arrAirport, Date depDate, String classCode, int numberOfPassengers) {
+        List<Flight> flightsInit = flightRepository.findByFlightGeneric_DepartureAirport_CodeAndFlightGeneric_ArrivalAirport_CodeAndDepartureDateAndIsFullFalse(depAirport, arrAirport, depDate);
+
+        List<Flight> flights = new ArrayList<>();
+        for(Flight flight : flightsInit) {
+            List<Reservation> reservations = reservationRepository.findByFlight_IdAndSeatClass_Code(flight.getId(), classCode);
+            if (reservations.size() + numberOfPassengers <= seatsRepository.findByPlane_IdAndSeatClass_Code(flight.getFlightGeneric().getPlane().getId(), classCode).getNumberOfSeats()) {
+                flights.add(flight);
+            }
+        }
+        return flights;
     }
 }

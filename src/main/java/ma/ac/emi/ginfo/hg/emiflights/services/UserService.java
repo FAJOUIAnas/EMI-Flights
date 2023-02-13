@@ -68,12 +68,6 @@ public class UserService {
         return user;
     }
 
-    public User modifyUserAdress(User user, String adress){
-        user.setAdress(adress);
-        userRepository.save(user);
-        return user;
-    }
-
     public User modifyUserBirthDate(User user, LocalDate birthDate){
         user.setBirthDate(birthDate);
         userRepository.save(user);

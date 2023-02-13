@@ -1,11 +1,9 @@
 package ma.ac.emi.ginfo.hg.emiflights.repositories;
 
 import jakarta.transaction.Transactional;
-import ma.ac.emi.ginfo.hg.emiflights.entities.Flight;
-import ma.ac.emi.ginfo.hg.emiflights.entities.Plane;
 import ma.ac.emi.ginfo.hg.emiflights.entities.Reservation;
-import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,7 +18,10 @@ public interface ReservationRepository extends JpaRepository<Reservation, UUID> 
 
     Optional<Reservation> findReservationByCode(String code);
 
-    Optional<Reservation> findReservationByCreationDate(LocalDate creationDate);
+    @Query("select r from Reservation r where r.flight.id = ?1 and r.seatClass.code = ?2")
+    List<Reservation> findByFlight_IdAndSeatClass_Code(UUID id, String code);
+
+    /*Optional<Reservation> findReservationByCreationDate(LocalDate creationDate);
 
     Optional<Reservation> findReservationByModificationDate(LocalDate modificationDate);
 
@@ -28,7 +29,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, UUID> 
 
     Optional<Reservation> findReservationByPassengerFirstName(String firstName);
 
-    Optional<Reservation> findReservationByPassengerLastName(String lastName);
+    Optional<Reservation> findReservationByPassengerLastName(String lastName);*/
 
 
 }

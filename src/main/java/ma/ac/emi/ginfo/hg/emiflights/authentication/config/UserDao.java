@@ -28,6 +28,16 @@ public class UserDao {
     )
     );
 
+    private static List<String> tokens = new ArrayList<>();
+
+    public static List<String> getTokens() {
+        return tokens;
+    }
+
+    public static void setTokens(List<String> tokens) {
+        UserDao.tokens = tokens;
+    }
+
     public static List<UserDetails> getApplicationUsers() {
         return APPLICATION_USERS;
     }

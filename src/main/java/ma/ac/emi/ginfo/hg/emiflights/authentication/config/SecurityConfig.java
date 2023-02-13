@@ -2,6 +2,7 @@ package ma.ac.emi.ginfo.hg.emiflights.authentication.config;
 
 import jakarta.servlet.Filter;
 import lombok.RequiredArgsConstructor;
+import ma.ac.emi.ginfo.hg.emiflights.services.UserService;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,6 +42,7 @@ import java.util.List;
 public class SecurityConfig {
     private final JwtAthFilter jwtAthFilter;
     private final UserDao userDao;
+    private final UserService userService;
 
     @Bean
     public SecurityFilterChain SecurityFilterChain(HttpSecurity http) throws Exception {
@@ -79,6 +81,7 @@ public class SecurityConfig {
             @Override
             public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
                 return userDao.findUserByEmail(email);
+                //return userService.findUserByUsername(email);
             }
         };
     }

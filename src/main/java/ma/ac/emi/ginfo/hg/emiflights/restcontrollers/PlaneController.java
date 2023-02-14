@@ -24,10 +24,10 @@ public class PlaneController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Plane>> getAllPlanes(/*@RequestHeader(HttpHeaders.AUTHORIZATION) String bearerToken*/) {
-        /*String token = bearerToken.substring(7);
+    public ResponseEntity<List<Plane>> getAllPlanes(@RequestHeader(HttpHeaders.AUTHORIZATION) String bearerToken) {
+        String token = bearerToken.substring(7);
         String username = jwtUtils.extractUsername(token);
-        System.out.println(username);*/
+        System.out.println(username);
         List<Plane> planes = planeService.findAllPlanes();
         return new ResponseEntity<>(planes, HttpStatus.OK);
     }

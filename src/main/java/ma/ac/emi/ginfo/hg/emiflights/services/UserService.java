@@ -1,10 +1,7 @@
 package ma.ac.emi.ginfo.hg.emiflights.services;
 
-import ma.ac.emi.ginfo.hg.emiflights.entities.Flight;
 import ma.ac.emi.ginfo.hg.emiflights.entities.User;
-import ma.ac.emi.ginfo.hg.emiflights.exception.FlightNotFoundException;
 import ma.ac.emi.ginfo.hg.emiflights.exception.UserNotFoundException;
-import ma.ac.emi.ginfo.hg.emiflights.repositories.FlightRepository;
 import ma.ac.emi.ginfo.hg.emiflights.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,7 +33,7 @@ public class UserService {
     }
 
     public User findUserById(UUID id) {
-        return userRepository.findUserById(id)
+        return userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User by id " + id + " was not found"));
     }
 

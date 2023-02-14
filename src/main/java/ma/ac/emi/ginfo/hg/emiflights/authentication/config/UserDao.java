@@ -28,15 +28,7 @@ public class UserDao {
     )
     );
 
-    private static List<String> PROFILE_PICS_USERS = new ArrayList<>();
 
-    public static List<String> getProfilePicsUsers() {
-        return PROFILE_PICS_USERS;
-    }
-
-    public static void setProfilePicsUsers(List<String> profilePicsUsers) {
-        PROFILE_PICS_USERS = profilePicsUsers;
-    }
 
     private static List<String> tokens = new ArrayList<>();
 

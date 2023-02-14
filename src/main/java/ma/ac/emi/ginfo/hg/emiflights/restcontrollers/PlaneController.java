@@ -1,7 +1,9 @@
 package ma.ac.emi.ginfo.hg.emiflights.restcontrollers;
 
+import ma.ac.emi.ginfo.hg.emiflights.authentication.config.JwtUtils;
 import ma.ac.emi.ginfo.hg.emiflights.entities.Plane;
 import ma.ac.emi.ginfo.hg.emiflights.services.PlaneService;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,14 +15,19 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/plane")
 public class PlaneController {
+    private final JwtUtils jwtUtils;
     private final PlaneService planeService;
 
-    public PlaneController(PlaneService planeService) {
+    public PlaneController(JwtUtils jwtUtils, PlaneService planeService) {
+        this.jwtUtils = jwtUtils;
         this.planeService = planeService;
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Plane>> getAllPlanes() {
+    public ResponseEntity<List<Plane>> getAllPlanes(/*@RequestHeader(HttpHeaders.AUTHORIZATION) String bearerToken*/) {
+        /*String token = bearerToken.substring(7);
+        String username = jwtUtils.extractUsername(token);
+        System.out.println(username);*/
         List<Plane> planes = planeService.findAllPlanes();
         return new ResponseEntity<>(planes, HttpStatus.OK);
     }

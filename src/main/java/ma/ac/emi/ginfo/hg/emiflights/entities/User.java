@@ -58,6 +58,19 @@ public class User implements Serializable, UserDetails {
         this.authorities = authorities;
     }
 
+    public User(String firstName, String lastName, String email, Civility civility, LocalDate birthDate, String adress, String username, String password, String token, Set<GrantedAuthority> authorities) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.civility = civility;
+        this.birthDate = birthDate;
+        this.adress = adress;
+        this.username = username;
+        this.password = password;
+        this.token = token;
+        this.authorities = authorities;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.authorities;

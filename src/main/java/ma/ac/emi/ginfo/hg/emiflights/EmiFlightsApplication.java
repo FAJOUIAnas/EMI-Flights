@@ -27,7 +27,7 @@ public class EmiFlightsApplication{
     public CommandLineRunner commandLineRunner(){
 
         return args -> {
-            User user = new User("saif", "password",
+            /*User user = new User("saif", "password",
                     Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))
             );
             userRepository.save(user);
@@ -42,7 +42,7 @@ public class EmiFlightsApplication{
             user = new User("houssam", "password_4",
                     Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))
             );
-            userRepository.save(user);
+            userRepository.save(user);*/
         };
     }
 }

@@ -21,6 +21,4 @@ public interface SeatsRepository extends JpaRepository<Seats, UUID> {
     @Query("select s from Seats s where s.plane.id = ?1 and s.seatClass.code = ?2")
     Seats findByPlane_IdAndSeatClass_Code(UUID id, String code);
 
-
-
 }

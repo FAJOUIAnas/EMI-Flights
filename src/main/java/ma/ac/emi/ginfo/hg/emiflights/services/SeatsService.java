@@ -65,4 +65,8 @@ public class SeatsService {
     public void deleteSeats(UUID id) {
         seatsRepository.deleteSeatsById(id);
     }
+
+    public int getNumberOfSeats(UUID planeId, String seatClassCode) {
+        return seatsRepository.findByPlane_IdAndSeatClass_Code(planeId, seatClassCode).getNumberOfSeats();
+    }
 }

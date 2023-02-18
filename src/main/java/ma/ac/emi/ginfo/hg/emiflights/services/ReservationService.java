@@ -84,4 +84,8 @@ public class ReservationService {
         return reservation;
     }
 
+    public List<Reservation> getReservationsByFlightIdAndSeatClassCode(UUID flightId, String seatClassCode) {
+        return reservationRepository.findByFlight_IdAndSeatClass_Code(flightId, seatClassCode);
+    }
+
 }

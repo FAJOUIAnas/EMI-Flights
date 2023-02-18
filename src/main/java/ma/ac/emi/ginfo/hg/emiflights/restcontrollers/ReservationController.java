@@ -1,6 +1,8 @@
 package ma.ac.emi.ginfo.hg.emiflights.restcontrollers;
 
 import ma.ac.emi.ginfo.hg.emiflights.entities.Reservation;
+import ma.ac.emi.ginfo.hg.emiflights.repositories.FlightGenericRepository;
+import ma.ac.emi.ginfo.hg.emiflights.repositories.FlightRepository;
 import ma.ac.emi.ginfo.hg.emiflights.services.ReservationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +16,15 @@ import java.util.UUID;
 @RequestMapping("/reservation")
 public class ReservationController {
     private final ReservationService reservationService;
+    private final FlightRepository flightRepository;
+    private final FlightGenericRepository flightGenericRepository;
 
-    public ReservationController(ReservationService reservationService) {
+    public ReservationController(ReservationService reservationService,
+                                 FlightRepository flightRepository,
+                                 FlightGenericRepository flightGenericRepository) {
         this.reservationService = reservationService;
+        this.flightRepository = flightRepository;
+        this.flightGenericRepository = flightGenericRepository;
     }
 
     @GetMapping("/all")
@@ -54,6 +62,12 @@ public class ReservationController {
     public ResponseEntity<?> deleteReservation(@PathVariable("id") UUID id) {
         reservationService.deleteReservation(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/find-by-flight-and-class/{flightId}/{seatClassCode}")
+    public ResponseEntity<List<Reservation>> getReservationsOfFlightAndClass(@PathVariable UUID flightId,@PathVariable String seatClassCode) {
+        List<Reservation> Reservations = reservationService.getReservationsByFlightIdAndSeatClassCode(flightId, seatClassCode);
+        return new ResponseEntity<>(Reservations, HttpStatus.OK);
     }
 
 

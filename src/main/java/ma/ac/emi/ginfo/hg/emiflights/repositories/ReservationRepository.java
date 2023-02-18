@@ -21,15 +21,4 @@ public interface ReservationRepository extends JpaRepository<Reservation, UUID> 
     @Query("select r from Reservation r where r.flight.id = ?1 and r.seatClass.code = ?2")
     List<Reservation> findByFlight_IdAndSeatClass_Code(UUID id, String code);
 
-    /*Optional<Reservation> findReservationByCreationDate(LocalDate creationDate);
-
-    Optional<Reservation> findReservationByModificationDate(LocalDate modificationDate);
-
-    Optional<Reservation> findReservationByFlight(Flight flight);
-
-    Optional<Reservation> findReservationByPassengerFirstName(String firstName);
-
-    Optional<Reservation> findReservationByPassengerLastName(String lastName);*/
-
-
 }

@@ -57,7 +57,8 @@ public class AuthController {
                 List<String> tokens = UserDao.getTokens();
                 tokens.add(token);
                 UserDao.setTokens(tokens);
-                return ResponseEntity.ok(new Response(token, UserDao.getTokens(),userDetails_copy));
+                return ResponseEntity.ok(new Response(token,
+                        UserDao.getTokens(), userDetails_copy));
             }
         }
         return (ResponseEntity<Response>) ResponseEntity.badRequest();

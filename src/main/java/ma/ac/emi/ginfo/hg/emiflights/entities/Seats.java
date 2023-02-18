@@ -30,6 +30,12 @@ public class Seats implements Serializable {
 
     private int numberOfSeats;
 
+    public Seats(Plane plane, Class seatClass, int numberOfSeats) {
+        this.plane = plane;
+        this.seatClass = seatClass;
+        this.numberOfSeats = numberOfSeats;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

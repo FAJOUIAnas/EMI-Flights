@@ -21,7 +21,7 @@ Content-Type: application/json
     "code" : "MON"
   },
   "plane" : {
-    "id" : "4e1d4f72-4bec-4931-86bb-507444ad1466"
+    "id" : "50c1a2c5-9d4b-4ac4-a856-be7c018bdc1b"
   },
   "departureTerminal" : {
     "code" : "CDG-2B"

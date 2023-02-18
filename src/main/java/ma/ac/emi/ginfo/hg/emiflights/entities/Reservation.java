@@ -72,6 +72,22 @@ public class Reservation implements Serializable {
     @Nonnull
     private double price;
 
+    public Reservation(String code, Flight flight, User user, Date creationDate, Date modificationDate, String passengerLastName, String passengerFirstName, Civility passengerCivility, AgeGroup passengerAgeGroup, Class seatClass, String seatNumber, ReservationStatus reservationStatus, double price) {
+        this.code = code;
+        this.flight = flight;
+        this.user = user;
+        this.creationDate = creationDate;
+        this.modificationDate = modificationDate;
+        this.passengerLastName = passengerLastName;
+        this.passengerFirstName = passengerFirstName;
+        this.passengerCivility = passengerCivility;
+        this.passengerAgeGroup = passengerAgeGroup;
+        this.seatClass = seatClass;
+        this.seatNumber = seatNumber;
+        this.reservationStatus = reservationStatus;
+        this.price = price;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

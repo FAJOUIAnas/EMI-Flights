@@ -28,6 +28,11 @@ public class Plane implements Serializable {
     @Nonnull
     private String companyName;
 
+    public Plane(String model, String companyName) {
+        this.model = model;
+        this.companyName = companyName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

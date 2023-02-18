@@ -51,7 +51,7 @@ public class EmiFlightsApplication{
                     "adress","houssam", "password_4","",
                     Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))
             );
-            userRepository.save(user);
+            userRepository.save(user);*/
         };
     }
 }

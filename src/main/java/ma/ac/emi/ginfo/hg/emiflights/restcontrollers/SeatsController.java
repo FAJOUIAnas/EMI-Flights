@@ -48,5 +48,11 @@ public class SeatsController {
         seatsService.deleteSeats(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/get-number-of-seats/{planeId}/{seatClassCode}")
+    public ResponseEntity<Integer> getNumberOfSeats(@PathVariable UUID planeId, @PathVariable String seatClassCode) {
+        int nbOfSeats = seatsService.getNumberOfSeats(planeId, seatClassCode);
+        return new ResponseEntity<>(nbOfSeats, HttpStatus.OK) ;
+    }
 }
 

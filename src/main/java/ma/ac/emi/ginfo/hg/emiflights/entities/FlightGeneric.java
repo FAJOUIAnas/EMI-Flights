@@ -47,4 +47,16 @@ public class FlightGeneric implements Serializable {
 
     @OneToOne
     private Terminal arrivalTerminal;
+
+    public FlightGeneric(Airport departureAirport, Airport arrivalAirport, Date departureHour, Date arrivalHour, BigDecimal basePrice, Day day, Plane plane, Terminal departureTerminal, Terminal arrivalTerminal) {
+        this.departureAirport = departureAirport;
+        this.arrivalAirport = arrivalAirport;
+        this.departureHour = departureHour;
+        this.arrivalHour = arrivalHour;
+        this.basePrice = basePrice;
+        this.day = day;
+        this.plane = plane;
+        this.departureTerminal = departureTerminal;
+        this.arrivalTerminal = arrivalTerminal;
+    }
 }

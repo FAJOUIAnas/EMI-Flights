@@ -7,6 +7,7 @@ import org.hibernate.Hibernate;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -30,6 +31,13 @@ public class Flight implements Serializable {
 
     @ManyToOne
     private FlightStatus flightStatus;
+
+    public Flight(FlightGeneric flightGeneric, Date departureDate, Boolean isFull, FlightStatus flightStatus) {
+        this.flightGeneric = flightGeneric;
+        this.departureDate = departureDate;
+        this.isFull = isFull;
+        this.flightStatus = flightStatus;
+    }
 
     @Override
     public boolean equals(Object o) {

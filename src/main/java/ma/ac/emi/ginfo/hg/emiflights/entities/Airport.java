@@ -26,4 +26,11 @@ public class Airport implements Serializable {
 
     @Nonnull
     private String country;
+
+    public Airport(String code, String label, String city, String country) {
+        this.code = code;
+        this.label = label;
+        this.city = city;
+        this.country = country;
+    }
 }

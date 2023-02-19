@@ -14,6 +14,7 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
+@AllArgsConstructor
 public class Civility implements Serializable {
     @Id
     @Column(length = 20)

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
@@ -101,6 +102,7 @@ public class FlightGenericService {
             flight.setFlightGeneric(flightGenericSaved);
             date.setMonth(Calendar.JANUARY);
             date.setDate(d);
+            //LocalDate localDate = LocalDate.ofInstant(date.toInstant(), ZoneId.systemDefault());
             flight.setDepartureDate(date);
             flight.setFlightStatus(scheduled);
             flightRepository.save(flight);

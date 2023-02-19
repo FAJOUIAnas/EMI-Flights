@@ -25,4 +25,10 @@ public class Terminal implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Airport airport;
+
+    public Terminal(String code, String label, Airport airport) {
+        this.code = code;
+        this.label = label;
+        this.airport = airport;
+    }
 }

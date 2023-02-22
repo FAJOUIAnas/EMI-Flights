@@ -35,6 +35,10 @@ public class ReservationService {
         this.reservationStatusRepository = reservationStatusRepository;
     }
 
+    public List<Reservation> getReservationsByUser(UUID userId) {
+        return reservationRepository.findByUserId(userId);
+    }
+
     public Reservation addReservation(Reservation reservation) {
 
         Civility passengerCivility = civilityRepository.findCivilityByCode(reservation.getPassengerCivility().getCode())

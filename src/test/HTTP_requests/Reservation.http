@@ -24,6 +24,9 @@ Content-Type: application/json
   "price" : 5000,
   "flight" : {
     "id" : "57dde4ca-a291-44f8-aee7-a55c8d8b5dd1"
+  },
+  "user": {
+    "id": "06f19315-e40e-4099-857f-2367e0664d61"
   }
 }
 

@@ -51,6 +51,11 @@ public class ReservationController {
         return new ResponseEntity<>(Reservation, HttpStatus.OK);
     }
 
+    @GetMapping("/user/{userId}")
+    public List<Reservation> getReservationsByUser(@PathVariable("userId") UUID userId) {
+        return reservationService.getReservationsByUser(userId);
+    }
+
     @GetMapping("/find/{Code}")
     public ResponseEntity<Reservation> getReservationByCode(@PathVariable("Code") String Code) {
         Reservation Reservation = reservationService.findReservationByCode(Code);

@@ -27,7 +27,7 @@ public class EmiFlightsApplication{
     }
 
 
-    @Bean
+    /*@Bean
     public CommandLineRunner commandLineRunner(){
 
         return args -> {
@@ -53,5 +53,5 @@ public class EmiFlightsApplication{
             );
             userRepository.save(user);
         };
-    }
+    }*/
 }

@@ -14,17 +14,17 @@ Content-Type: application/json
   "arrivalAirport" : {
     "code" : "CMN"
   },
-  "departureHour" : "17:35",
-  "arrivalHour" : "20:45",
-  "basePrice" : 1646.00,
+  "departureHour" : "13:05",
+  "arrivalHour" : "15:15",
+  "basePrice" : 1326.00,
   "day" : {
-    "code" : "MON"
+    "code" : "SAT"
   },
   "plane" : {
-    "id" : "50c1a2c5-9d4b-4ac4-a856-be7c018bdc1b"
+    "id" : "bfbbfb83-d801-4c96-8f62-5b14217dafbf"
   },
   "departureTerminal" : {
-    "code" : "CDG-2B"
+    "code" : "CDG-2E"
   },
   "arrivalTerminal" : {
     "code" : "CMN-2"

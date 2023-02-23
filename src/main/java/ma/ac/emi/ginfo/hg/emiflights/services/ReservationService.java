@@ -85,7 +85,7 @@ public class ReservationService {
     }
 
     public List<Reservation> getReservationsByFlightIdAndSeatClassCode(UUID flightId, String seatClassCode) {
-        return reservationRepository.findByFlight_IdAndSeatClass_Code(flightId, seatClassCode);
+        return reservationRepository.findByFlight_IdAndSeatClass_CodeAndReservationStatus_Code(flightId, seatClassCode, "SCHD");
     }
 
 }

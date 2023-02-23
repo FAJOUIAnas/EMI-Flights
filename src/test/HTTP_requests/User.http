@@ -6,7 +6,8 @@ POST http://localhost:8080/user/add
 Content-Type: application/json
 
 {
-  "firstName" : "name 3"
+  "username": "ddd",
+  "password": "dd"
 }
 
 ###
